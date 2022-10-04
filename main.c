@@ -2,10 +2,9 @@
 #include <stdbool.h>
 #include "tic-tac-toe.h"
 
-
-//size of game board
+//size of gameboard constants for arrays
 const int BOARDSIZE = 90;
-const int NUMSPACES = BOARDSIZE/10;
+const int NUMSPACE = BOARDSIZE/10;
 
 int main(int argc, char *argv[])
 {
@@ -18,16 +17,16 @@ int main(int argc, char *argv[])
 	//Flag for detecting if computer will play
 	bool comActive = false;
 	//Game board information
-	struct space board[BOARDSIZE][BOARDSIZE];
+	space board[BOARDSIZE][BOARDSIZE];
 	//Human players selected spaces
-	int playerSpaces[NUMSPACES];
-	int playerSpaces2[NUMSPACES];
+	int playerSpaces[NUMSPACE];
+	int playerSpaces2[NUMSPACE];
 
 /************************START******************************/
 
 	gameSetup(twoPlayer, playerSymbol, playerSymbol2,
 		comActive, playerSpaces, playerSpaces2,
-		board, BOARDSIZE, NUMSPACES);
+		board);
 
 	printf("Hello World!");
 
