@@ -20,18 +20,19 @@ int main(int argc, char *argv[])
 	//Scores
 	int score[NUMPLAYER];
 	//Game board information
-	space board[BOARDSIZE][BOARDSIZE];
+	char board[BOARDSIZE][BOARDSIZE];
 	//Human players selected spaces
-	int playerSpaces[NUMSPACE];
-	int playerSpaces2[NUMSPACE];
+	bool playerSpaces[NUMSPACE];
+	bool playerSpaces2[NUMSPACE];
 
 /************************START******************************/
 
-	gameSetup(twoPlayer, playerSymbol, playerSymbol2,
-		comActive, score, playerSpaces, playerSpaces2,
+	gameSetup(&twoPlayer, &playerSymbol, &playerSymbol2,
+		&comActive, score, playerSpaces, playerSpaces2,
 		board);
 
-	printf("Hello World!");
+	drawBoard(twoPlayer, playerSymbol, playerSymbol2, score,
+		playerSpaces, playerSpaces2, board);
 
 	return 0;
 }

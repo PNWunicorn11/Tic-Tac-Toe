@@ -6,16 +6,21 @@ extern const int BOARDSIZE;
 extern const int NUMSPACE;
 extern const int NUMPLAYER;
 
+/*
 //Info needed for each space of board
 typedef struct
 {
 	int spaceNum;
 	char spaceSymbol;
-} space;
+} space;*/
 
 //Sets up the game initial values
-void gameSetup(bool twoPlayer, char symbol, char symbol2, bool comPlayer, 
-	int score_num[NUMPLAYER], int spaces[], int spaces2[], space board[][BOARDSIZE]);
+void gameSetup(bool *twoPlayer, char *symbol, char *symbol2, bool *comPlayer, 
+	int score_num[], bool spaces[], bool spaces2[], char setBoard[][BOARDSIZE]);
+//Prints player scores and game board
+void drawBoard(bool twoPlayer, char symbol, char symbol2, int score_num[], 
+	bool spaces[], bool spaces2[], char printBoard[][BOARDSIZE]);
+//Gets input from stdin
 int get_answer(void);
 
 #endif
