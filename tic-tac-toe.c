@@ -60,16 +60,18 @@ void gameSetup(bool *twoPlayer, char *symbol, char *symbol2, bool *comPlayer,
 
 	//Initialize game board
 	for (int i = 0; i < BOARDSIZE; i++)
-	{
-		setBoard[i][i] = 0;
-	}
+		for (int j = 0; j < BOARDSIZE; j++)
+		{
+			setBoard[i][j] = 0;
+		}
 
 }
 
 void drawBoard(bool twoPlayer, char symbol, char symbol2, int score_num[NUMPLAYER], 
 	bool spaces[NUMSPACE], bool spaces2[NUMSPACE], char printBoard[][BOARDSIZE])
 {
-	int j = 0; //counter for loops
+	int row = 0; //counter for rows of board
+	int col = 0; //counter for columns of board
 	//Print player info
 	for (int i = 0; i < (BOARDSIZE/3); i++)
 		printf(" ");
@@ -90,9 +92,20 @@ void drawBoard(bool twoPlayer, char symbol, char symbol2, int score_num[NUMPLAYE
 
 	for(int i = 0; i < (BOARDSIZE/3) - 15; i++)
 		printf(" ");
-	printf("%d", score_num[j]);
+	printf("%d\n", score_num[j]);
 	j++;
 
+	//Print board
+	for (int row = 0; row < (BOARDSIZE/3); row++)
+		for (col = 0; col < BOARDSIZE; col++)
+		{	//Store first or last row
+			if (row == 0 || row == BOARDSIZE)
+				if (col == (BOARDSIZE/3) || col == 2(BOARDSIZE/3))
+					setBoard[i][j] = '|';
+			//Store space numbers 
+			if (row == 2 && (col == 2 || col == (BOARDSIZE/3) + 2)) 
+				setBoard[i][j] = ;
+		}
 
 
 }
