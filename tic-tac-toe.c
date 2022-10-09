@@ -68,45 +68,98 @@ void gameSetup(bool *twoPlayer, char *symbol, char *symbol2, bool *comPlayer,
 }
 
 void drawBoard(bool twoPlayer, char symbol, char symbol2, int score_num[NUMPLAYER], 
-	bool spaces[NUMSPACE], bool spaces2[NUMSPACE], char printBoard[][BOARDSIZE])
+	bool spaces[NUMSPACE], bool spaces2[NUMSPACE], char setBoard[][BOARDSIZE])
 {
 	int row = 0; //counter for rows of board
 	int col = 0; //counter for columns of board
+	int j = 0; //counter for loops
+	int i = 0; //counter for loops
+	char str[10]; //Used for converting integers to char
+
 	//Print player info
 	for (int i = 0; i < (BOARDSIZE/3); i++)
 		printf(" ");
-	printf("Player 1\t");
+	printf("Player 1  ");
 	printf("%c", symbol);
 
-	for (int i = 0; i < (BOARDSIZE/3) - 25; i++)
+	for (int i = 0; i < (BOARDSIZE/3); i++)
 		printf(" ");
 	if (twoPlayer == true)
-		printf ("Player 2\t");
+		printf ("Player 2  ");
 	else
-		printf ("Computer\t");
+		printf ("Computer  ");
 	printf ("%c\n", symbol2);
 
 	for(int i = 0; i < (BOARDSIZE/3); i++)
 			printf(" ");
 		printf("%d", score_num[j]);
 
-	for(int i = 0; i < (BOARDSIZE/3) - 15; i++)
+	for(int i = 0; i < (BOARDSIZE/3) + 10; i++)
 		printf(" ");
 	printf("%d\n", score_num[j]);
-	j++;
+	printf("\n");
 
-	//Print board
-	for (int row = 0; row < (BOARDSIZE/3); row++)
+	//Preparing to print board
+	//Store first row of spaces
+	for (row = 0; row < (BOARDSIZE/3); row++)
 		for (col = 0; col < BOARDSIZE; col++)
-		{	//Store first or last row
-			if (row == 0 || row == BOARDSIZE)
-				if (col == (BOARDSIZE/3) || col == 2(BOARDSIZE/3))
-					setBoard[i][j] = '|';
+		{	
+			//Store vertical lines
+			if (col == ((BOARDSIZE/3) - 1) || col == (2*(BOARDSIZE/3) - 1))
+				setBoard[row][col] = '|';
 			//Store space numbers 
-			if (row == 2 && (col == 2 || col == (BOARDSIZE/3) + 2)) 
-				setBoard[i][j] = ;
+			else if (row == 1 && (col == 2 || col == ((BOARDSIZE/3) + 1)
+				|| col == (2*(BOARDSIZE/3) + 1)))
+			{
+				//store counter as char
+				sprintf(str, "%d", j + 1);
+				setBoard[row][col] = str[0];
+				j++;
+			} //Store horizontal line
+			else if (row == ((BOARDSIZE/3) - 6) && col < (BOARDSIZE - 1))
+				setBoard[row][col] = '-';
+			else if (col == (BOARDSIZE - 1))
+				setBoard[row][col] = '\n';
+			else
+				setBoard[row][col] = ' ';
+			
 		}
+	//Store second row of spaces
+	/*for (row = (BOARDSIZE/3) + 1; row < BOARDSIZE; row++)
+		for (col = 0; col <= BOARDSIZE; col++)
+		{
+			//Store space numbers
+			if (row == ((BOARDSIZE/3) + 1) && (col == 2 ||
+				col == ((BOARDSIZE/3) + 2) ||
+				col == (2*(BOARDSIZE/3))))
+			{
+				//store counter as char
+				sprintf(str, "%d", j + 1);
+				setBoard[row][col] = str[0];
+				j++;
+			}
+			else if (col == BOARDSIZE)
+				setBoard[row][col] = '\n';
+			else
+				setBoard[row][col] = ' ';
+		}*/
 
+	//Print two rows of spaces
+		for (row = 0; row < BOARDSIZE; row++)
+		{
+			//Center board
+			while (i < 7)
+			{
+				printf(" ");
+				i++;
+			}
+			i = 0;
+		
+			for (col = 0; col < BOARDSIZE; col++)
+			{	
+				printf("%c", setBoard[row][col]);
+			}
+		}
 
 }
 

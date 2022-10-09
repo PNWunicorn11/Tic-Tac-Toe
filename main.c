@@ -3,8 +3,8 @@
 #include "tic-tac-toe.h"
 
 //size of gameboard constants for arrays
-const int BOARDSIZE = 90;
-const int NUMSPACE = BOARDSIZE/10;
+const int BOARDSIZE = 30;
+const int NUMSPACE = (BOARDSIZE/3) - 1;
 const int NUMPLAYER = 2;
 
 int main(int argc, char *argv[])
