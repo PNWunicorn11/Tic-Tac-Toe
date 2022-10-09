@@ -2,9 +2,8 @@
 #include <stdbool.h>
 #include "tic-tac-toe.h"
 
-void gameSetup(bool *twoPlayer, char *symbol, char *symbol2, bool *comPlayer,
-	int score_num[NUMPLAYER], bool spaces[NUMSPACE],
-	bool spaces2[NUMSPACE], char setBoard[][BOARDSIZE])
+void gameSetup(bool *twoPlayer, char *symbol, char *symbol2, int score_num[NUMPLAYER], 
+	bool spaces[NUMSPACE], bool spaces2[NUMSPACE], char setBoard[][BOARDSIZE])
 {
 	//Welcome player and ask if two human players
 	printf("Welcome to Tic Tac Toe!\n");
@@ -20,8 +19,6 @@ void gameSetup(bool *twoPlayer, char *symbol, char *symbol2, bool *comPlayer,
 
 	if (*symbol == 'y')
 		*twoPlayer = true;
-	if (*symbol == 'n')
-		*comPlayer = true;
 	//Get player symbol and set player 2 or computer symbol
 	//If incorrect letter is entered, ask again
 	printf("Please enter your symbol (x/o)\n");
@@ -98,7 +95,7 @@ void drawBoard(bool twoPlayer, char symbol, char symbol2, int score_num[NUMPLAYE
 		printf(" ");
 	printf("%d\n", score_num[j]);
 	printf("\n");
-
+	i = 0;
 	//Preparing to print board
 	//Store first row of spaces
 	for (row = 0; row < (BOARDSIZE/3); row++)
@@ -108,14 +105,28 @@ void drawBoard(bool twoPlayer, char symbol, char symbol2, int score_num[NUMPLAYE
 			if (col == ((BOARDSIZE/3) - 1) || col == (2*(BOARDSIZE/3) - 1))
 				setBoard[row][col] = '|';
 			//Store space numbers 
-			else if (row == 1 && (col == 1 || col == ((BOARDSIZE/3) + 1)
+			else if (row == 0 && (col == 1 || col == ((BOARDSIZE/3) + 1)
 				|| col == (2*(BOARDSIZE/3) + 1)))
 			{
 				//store counter as char
 				sprintf(str, "%d", j + 1);
 				setBoard[row][col] = str[0];
 				j++;
-			} //Store horizontal line
+			}
+			//Store space symbol
+			else if (row == ((BOARDSIZE/3) - 8) && (col == 3 ||
+				col == ((BOARDSIZE/3) + 3) || col == (2*(BOARDSIZE/3) + 3)))
+			{
+				if (spaces[i] == true)
+					setBoard[row][col] = symbol;
+				else if (spaces2[i] == true)
+					setBoard[row][col] = symbol2;
+				else
+					setBoard[row][col] = ' ';
+				i++;
+
+			}	 
+			//Store horizontal line
 			else if (row == ((BOARDSIZE/3) - 6) && col < (BOARDSIZE - 1))
 				setBoard[row][col] = '-';
 			else if (col == (BOARDSIZE - 1))
@@ -124,14 +135,14 @@ void drawBoard(bool twoPlayer, char symbol, char symbol2, int score_num[NUMPLAYE
 				setBoard[row][col] = ' ';
 			
 		}
-	//Store second row of spaces
+	//Store second and third rows of spaces
 	for (row = (BOARDSIZE/3) - 5; row < (2*(BOARDSIZE/3) - 6); row++)
 		for (col = 0; col < BOARDSIZE; col++)
 		{
 			//Store vertical lines
 			if (col == ((BOARDSIZE/3) - 1) || col == (2*(BOARDSIZE/3) - 1))
 				setBoard[row][col] = '|';
-			//Store space numbers
+			//Store second row space numbers
 			else if (row == ((BOARDSIZE/3) - 5) && (col == 1 ||
 				col == ((BOARDSIZE/3) + 1) ||
 				col == (2*(BOARDSIZE/3) + 1)))
@@ -141,6 +152,42 @@ void drawBoard(bool twoPlayer, char symbol, char symbol2, int score_num[NUMPLAYE
 				setBoard[row][col] = str[0];
 				j++;
 			}
+			//Store third row space numbers
+			else if (row == (2*(BOARDSIZE/3) - 10) && (col == 1 ||
+				col == ((BOARDSIZE/3) + 1) ||
+				col == (2*(BOARDSIZE/3) + 1)))
+			{
+				//Store counter as char
+				sprintf(str, "%d", j + 1);
+				setBoard[row][col] = str[0];
+				j++;
+			}
+			//Store second row symbols
+			else if (row == (2*(BOARDSIZE/3) - 13) && (col == 3 ||
+				col == ((BOARDSIZE/3) + 3) || col == (2*(BOARDSIZE/3) + 3)))
+			{
+				if (spaces[i] == true)
+					setBoard[row][col] = symbol;
+				else if (spaces2[i] == true)
+					setBoard[row][col] = symbol2;
+				else
+					setBoard[row][col] = ' ';
+				i++;
+
+			}
+			//Store third row symbols
+			else if (row == (2*(BOARDSIZE/3) - 8) && (col == 3 ||
+				col == ((BOARDSIZE/3) + 3) || col == (2*(BOARDSIZE/3) + 3)))
+			{
+				if (spaces[i] == true)
+					setBoard[row][col] = symbol;
+				else if (spaces2[i] == true)
+					setBoard[row][col] = symbol2;
+				else
+					setBoard[row][col] = ' ';
+				i++;
+
+			}
 			//Store horizontal line
 			else if (row == (2*(BOARDSIZE/3) - 11) && col < (BOARDSIZE - 1))
 				setBoard[row][col] = '-';
@@ -149,23 +196,23 @@ void drawBoard(bool twoPlayer, char symbol, char symbol2, int score_num[NUMPLAYE
 			else
 				setBoard[row][col] = ' ';
 		}
-
+	i = 0;
 	//Print two rows of spaces
-		for (row = 0; row < BOARDSIZE; row++)
+	for (row = 0; row < BOARDSIZE; row++)
+	{
+		//Center board
+		while (i < 9)
 		{
-			//Center board
-			while (i < 9)
-			{
-				printf(" ");
-				i++;
-			}
-			i = 0;
-		
-			for (col = 0; col < BOARDSIZE; col++)
-			{	
-				printf("%c", setBoard[row][col]);
-			}
+			printf(" ");
+			i++;
 		}
+		i = 0;
+		
+		for (col = 0; col < BOARDSIZE; col++)
+		{	
+			printf("%c", setBoard[row][col]);
+		}
+	}
 
 }
 

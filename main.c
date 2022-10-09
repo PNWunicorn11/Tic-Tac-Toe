@@ -15,8 +15,6 @@ int main(int argc, char *argv[])
 	//Human player selected symbols
 	char playerSymbol = 0;
 	char playerSymbol2 = 0;
-	//Flag for detecting if computer will play
-	bool comActive = false;
 	//Scores
 	int score[NUMPLAYER];
 	//Game board information
@@ -25,14 +23,22 @@ int main(int argc, char *argv[])
 	bool playerSpaces[NUMSPACE];
 	bool playerSpaces2[NUMSPACE];
 
+	int i = 0; //Counter for loops
+
 /************************START******************************/
 
 	gameSetup(&twoPlayer, &playerSymbol, &playerSymbol2,
 		&comActive, score, playerSpaces, playerSpaces2,
 		board);
-
-	drawBoard(twoPlayer, playerSymbol, playerSymbol2, score,
+	do
+	{
+		drawBoard(twoPlayer, playerSymbol, playerSymbol2, score,
 		playerSpaces, playerSpaces2, board);
+		//Get moves from players
+
+		i++;
+	} while (i < NUMSPACES)
+	
 
 	return 0;
 }
