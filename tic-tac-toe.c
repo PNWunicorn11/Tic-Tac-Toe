@@ -108,7 +108,7 @@ void drawBoard(bool twoPlayer, char symbol, char symbol2, int score_num[NUMPLAYE
 			if (col == ((BOARDSIZE/3) - 1) || col == (2*(BOARDSIZE/3) - 1))
 				setBoard[row][col] = '|';
 			//Store space numbers 
-			else if (row == 1 && (col == 2 || col == ((BOARDSIZE/3) + 1)
+			else if (row == 1 && (col == 1 || col == ((BOARDSIZE/3) + 1)
 				|| col == (2*(BOARDSIZE/3) + 1)))
 			{
 				//store counter as char
@@ -125,30 +125,36 @@ void drawBoard(bool twoPlayer, char symbol, char symbol2, int score_num[NUMPLAYE
 			
 		}
 	//Store second row of spaces
-	/*for (row = (BOARDSIZE/3) + 1; row < BOARDSIZE; row++)
-		for (col = 0; col <= BOARDSIZE; col++)
+	for (row = (BOARDSIZE/3) - 5; row < (2*(BOARDSIZE/3) - 6); row++)
+		for (col = 0; col < BOARDSIZE; col++)
 		{
+			//Store vertical lines
+			if (col == ((BOARDSIZE/3) - 1) || col == (2*(BOARDSIZE/3) - 1))
+				setBoard[row][col] = '|';
 			//Store space numbers
-			if (row == ((BOARDSIZE/3) + 1) && (col == 2 ||
-				col == ((BOARDSIZE/3) + 2) ||
-				col == (2*(BOARDSIZE/3))))
+			else if (row == ((BOARDSIZE/3) - 5) && (col == 1 ||
+				col == ((BOARDSIZE/3) + 1) ||
+				col == (2*(BOARDSIZE/3) + 1)))
 			{
 				//store counter as char
 				sprintf(str, "%d", j + 1);
 				setBoard[row][col] = str[0];
 				j++;
 			}
-			else if (col == BOARDSIZE)
+			//Store horizontal line
+			else if (row == (2*(BOARDSIZE/3) - 11) && col < (BOARDSIZE - 1))
+				setBoard[row][col] = '-';
+			else if (col == (BOARDSIZE - 1))
 				setBoard[row][col] = '\n';
 			else
 				setBoard[row][col] = ' ';
-		}*/
+		}
 
 	//Print two rows of spaces
 		for (row = 0; row < BOARDSIZE; row++)
 		{
 			//Center board
-			while (i < 7)
+			while (i < 9)
 			{
 				printf(" ");
 				i++;
