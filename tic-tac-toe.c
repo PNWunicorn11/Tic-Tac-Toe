@@ -64,7 +64,7 @@ void gameSetup(bool *twoPlayer, char *symbol, char *symbol2, int score_num[NUMPL
 
 }
 
-void playerMove(bool twoPlayer, bool spaces[NUMSPACE], bool spaces2[NUMSPACE])
+void playerMove(const bool twoPlayer, bool spaces[NUMSPACE], bool spaces2[NUMSPACE])
 {
 	char getSpace = 0;
 	printf("Player 1, please select a space by entering its number.\n");
@@ -82,8 +82,57 @@ void playerMove(bool twoPlayer, bool spaces[NUMSPACE], bool spaces2[NUMSPACE])
 		spaces2[(getSpace - '0') - 1] = true;
 }
 
-void drawBoard(bool twoPlayer, char symbol, char symbol2, int score_num[NUMPLAYER], 
-	bool spaces[NUMSPACE], bool spaces2[NUMSPACE], char setBoard[][BOARDSIZE])
+void checkScore(const bool spaces[NUMSPACE], const bool spaces2[NUMSPACE], int currentScore[NUMPLAYER])
+{
+	//Compare to wins
+	int comp[(BOARDSIZE/3) - 1] = {0, 0, 0};
+	//Flag for winner
+	int winner1 = 0;
+	int winner2 = 0;
+	//counter for loops
+	int counter = 0;
+
+	//Get player 1 moves
+	while (!winner1 && counter < NUMSPACE)
+	{	//Get combination
+		if (comp[counter] == 0)
+			if (spaces[counter] == true)
+				comp[counter] = counter + 1;
+		//Compare combination
+		else
+		{
+			winner1 = compareWin(comp);
+		}
+
+		counter++;
+	}
+
+	counter = 0;
+	//Get player 2 moves
+	while (!winner2 && counter < NUMSPACE)
+	{
+		//Get combination
+		if (comp[counter] == 0)
+			if (spaces2[counter] == true)
+				comp[counter] = counter + 1;
+		//Compare combination
+		else
+		{
+			winner2 = compareWin(comp);
+		}
+
+		counter++;
+	}
+
+	//If winner, update score
+	if (winner)
+		currentScore[0]++;
+	else if (winner2)
+		currentScore[1]++;
+}
+
+void drawBoard(const bool twoPlayer, const char symbol, const char symbol2, const int score_num[NUMPLAYER], 
+	const bool spaces[NUMSPACE], const bool spaces2[NUMSPACE], char setBoard[][BOARDSIZE])
 {
 	int row = 0; //counter for rows of board
 	int col = 0; //counter for columns of board
@@ -114,6 +163,7 @@ void drawBoard(bool twoPlayer, char symbol, char symbol2, int score_num[NUMPLAYE
 	printf("%d\n", score_num[j]);
 	printf("\n");
 	i = 0;
+
 	//Preparing to print board
 	//Store first row of spaces
 	for (row = 0; row < (BOARDSIZE/3); row++)
@@ -232,7 +282,7 @@ void drawBoard(bool twoPlayer, char symbol, char symbol2, int score_num[NUMPLAYE
 		}
 	}
 
-	printf("\n\n");
+	printf("\n");
 
 }
 
@@ -248,4 +298,24 @@ int get_answer(void)
 	}
 
 	return answer;
+}
+
+int compareWin(const int compCombo[(BOARDSIZE/3) - 1])
+{
+	//Flag for winner
+	int winner = 0;
+	//Counter for loops
+	int i = 0;
+	//Compare move combo with all win combos
+	if (!(memcmp(comp, {0 ,0, 0}, ((BOARDSIZE/3) - 1))))
+	{
+		while (!winner && i < (NUMSPACE - 1))
+		{
+			if (memcmp(comp, winGame[i][], ((BOARDSIZE/3) - 1)))
+					winner = 1;
+			i++;
+		}
+	}
+	
+	return winner;
 }

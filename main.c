@@ -6,6 +6,7 @@
 const int BOARDSIZE = 30;
 const int NUMSPACE = (BOARDSIZE/3) - 1;
 const int NUMPLAYER = 2;
+const int NUMCOMBO = 3;
 
 int main(int argc, char *argv[])
 {
@@ -35,6 +36,7 @@ int main(int argc, char *argv[])
 		playerSpaces, playerSpaces2, board);
 		//Get moves from players
 		playerMove(twoPlayer, playerSpaces, playerSpaces2);
+		checkScore(playerSpaces, playerSpaces2, score);
 		i++;
 	} while (i < NUMSPACE);
 	
