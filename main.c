@@ -9,7 +9,7 @@ const int NUMPLAYER = 2;
 
 int main(int argc, char *argv[])
 {
-/**************************VARIABLES*************************/
+/**************************VARIABLES*****************************/
 	//Flag for detecting two human players
 	bool twoPlayer = false;
 	//Human player selected symbols
@@ -25,19 +25,18 @@ int main(int argc, char *argv[])
 
 	int i = 0; //Counter for loops
 
-/************************START******************************/
+/******************************START******************************/
 
-	gameSetup(&twoPlayer, &playerSymbol, &playerSymbol2,
-		&comActive, score, playerSpaces, playerSpaces2,
-		board);
+	gameSetup(&twoPlayer, &playerSymbol, &playerSymbol2, score, 
+		playerSpaces, playerSpaces2,board);
 	do
 	{
 		drawBoard(twoPlayer, playerSymbol, playerSymbol2, score,
 		playerSpaces, playerSpaces2, board);
 		//Get moves from players
-
+		playerMove(twoPlayer, playerSpaces, playerSpaces2);
 		i++;
-	} while (i < NUMSPACES)
+	} while (i < NUMSPACE);
 	
 
 	return 0;

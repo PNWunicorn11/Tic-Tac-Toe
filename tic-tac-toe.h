@@ -18,7 +18,7 @@ typedef struct
 void gameSetup(bool *twoPlayer, char *symbol, char *symbol2, int score_num[], 
 	bool spaces[], bool spaces2[], char setBoard[][BOARDSIZE]);
 //Gets each player (or computer) move
-int playerMove(bool twoPlayer, bool spaces[], bool spaces2[]);
+void playerMove(bool twoPlayer, bool spaces[], bool spaces2[]);
 //Prints player scores and game board
 void drawBoard(bool twoPlayer, char symbol, char symbol2, int score_num[], 
 	bool spaces[], bool spaces2[], char printBoard[][BOARDSIZE]);

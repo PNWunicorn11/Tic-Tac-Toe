@@ -64,6 +64,24 @@ void gameSetup(bool *twoPlayer, char *symbol, char *symbol2, int score_num[NUMPL
 
 }
 
+void playerMove(bool twoPlayer, bool spaces[NUMSPACE], bool spaces2[NUMSPACE])
+{
+	char getSpace = 0;
+	printf("Player 1, please select a space by entering its number.\n");
+	getSpace = get_answer();
+	//Check for valid space choice and update space
+	if ((getSpace - '0') > 0 && (getSpace - '0') < 10)
+		spaces[(getSpace - '0') - 1] = true;
+	if (twoPlayer == true)
+	{
+		printf("Player 2, please select a space by entering its number.\n");
+		getSpace = get_answer();
+	}
+	//Check for valid space choice and update space
+	if ((getSpace - '0') > 0 && (getSpace - '0') < 10)
+		spaces2[(getSpace - '0') - 1] = true;
+}
+
 void drawBoard(bool twoPlayer, char symbol, char symbol2, int score_num[NUMPLAYER], 
 	bool spaces[NUMSPACE], bool spaces2[NUMSPACE], char setBoard[][BOARDSIZE])
 {
@@ -213,6 +231,8 @@ void drawBoard(bool twoPlayer, char symbol, char symbol2, int score_num[NUMPLAYE
 			printf("%c", setBoard[row][col]);
 		}
 	}
+
+	printf("\n\n");
 
 }
 
