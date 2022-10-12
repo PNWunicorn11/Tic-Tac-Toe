@@ -8,6 +8,18 @@ const int NUMSPACE = (BOARDSIZE/3) - 1;
 const int NUMPLAYER = 2;
 const int NUMCOMBO = 3;
 
+//All winning combinations
+const int WINGAME[8][3] = {
+	{1, 2, 3},
+	{1, 4, 7},
+	{1, 5, 9},
+	{2, 5, 8},
+	{3, 6, 9},
+	{3, 5, 7},
+	{4, 5, 6},
+	{7, 8, 9}
+};
+
 int main(int argc, char *argv[])
 {
 /**************************VARIABLES*****************************/
@@ -24,6 +36,9 @@ int main(int argc, char *argv[])
 	bool playerSpaces[NUMSPACE];
 	bool playerSpaces2[NUMSPACE];
 
+	//Matched numbers for comparing combos
+	int matchCombo = 0;
+
 	int i = 0; //Counter for loops
 
 /******************************START******************************/
@@ -36,7 +51,7 @@ int main(int argc, char *argv[])
 		playerSpaces, playerSpaces2, board);
 		//Get moves from players
 		playerMove(twoPlayer, playerSpaces, playerSpaces2);
-		checkScore(playerSpaces, playerSpaces2, score);
+		checkScore(twoPlayer, playerSpaces, playerSpaces2, score, matchCombo);
 		i++;
 	} while (i < NUMSPACE);
 	

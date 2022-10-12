@@ -7,17 +7,8 @@ extern const int NUMSPACE;
 extern const int NUMPLAYER;
 //Number of spaces in a winning combo
 extern const int NUMCOMBO;
+extern const int WINGAME[][3];
 
-//All winning combinations
-const int winGame[NUMSPACE - 2][NUMCOMBO] = {
-	{1, 2, 3},
-	{1, 4, 7},
-	{1, 5, 9},
-	{2, 5, 8},
-	{3, 6, 9},
-	{4, 5, 6},
-	{7, 8, 9}
-};
 /*//Info needed for each space of board
 typedef const struct
 {
@@ -36,13 +27,15 @@ void gameSetup(bool *twoPlayer, char *symbol, char *symbol2, int score_num[],
 //Gets each player (or computer) move
 void playerMove(const bool twoPlayer, bool spaces[], bool spaces2[]);
 //Checks score and updates
-void checkScore(const bool spaces[], const bool spaces2[], int currentScore[]);
+void checkScore(const bool twoPlayer, const bool spaces[], const bool spaces2[], 
+	int currentScore[], int match);
 //Prints player scores and game board
 void drawBoard(const bool twoPlayer, const char symbol, const char symbol2, const int score_num[], 
 	const bool spaces[], const bool spaces2[], char printBoard[][BOARDSIZE]);
 //Gets input from stdin
 int get_answer(void);
 //Compares move combo with win combo
-int compareWin(int compCombo[]);
+int compareWin(const int compCombo[]);
+void createCombo(const bool spaces[], const int *match, int combo[]);
 
 #endif
