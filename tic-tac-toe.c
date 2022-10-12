@@ -98,8 +98,11 @@ void checkScore(const bool twoPlayer, const bool spaces[NUMSPACE], const bool sp
 	int counter = 0;
 
 	//While there are still combos of moves to compare
+
+	//Get combo
+	createCombo(spaces, &matchNum, comp);
 	//While not a winner
-	while (matchNum < (NUMSPACE/3) && !winner1)
+	while (matchNum < (NUMSPACE/3) && !winner1 && comp[matchNum] != 0)
 	{
 		//Get combo
 		createCombo(spaces, &matchNum, comp);
@@ -110,25 +113,22 @@ void checkScore(const bool twoPlayer, const bool spaces[NUMSPACE], const bool sp
 		matchNum++;
 
 	}
-			
 
-	counter = 0;
+	matchNum = 0;
+
+	//Get combo
+	createCombo(spaces2, &matchNum, comp);
 	
 	//Get player 2 moves
-	while (!winner2 && counter < NUMSPACE)
+	while (matchNum < (NUMSPACE/3) && !winner2 && comp[matchNum] != 0)
 	{
-		//Get combination
-		if (comp[counter] == 0)
-		{
-			createCombo(spaces2, &matchNum, comp);
-		}
-		//Compare combination
-		else
-		{
-			winner2 = compareWin(comp);
-		}
+		//Get combo
+		createCombo(spaces2, &matchNum, comp);
+				
+		//Compare combo
+		winner2 = compareWin(comp);
 
-		counter++;
+		matchNum++;
 	}
 
 	//If winner, update score
@@ -371,6 +371,9 @@ void createCombo(const bool spaces[], const int *match, int combo[])
 	//Initialize
 	int allSpaces[NUMSPACE];
 
+	//Counter for loops
+	int j = 0;
+
 	for (int i = 0; i < NUMSPACE; i++)
 		allSpaces[i] = 0;
 	
@@ -378,7 +381,10 @@ void createCombo(const bool spaces[], const int *match, int combo[])
 	for (int i = 0; i < NUMSPACE; i++)
 	{
 		if (spaces[i] == true)
-		allSpaces[i] = i + 1;
+		{
+			allSpaces[j] = i + 1;
+			j++;
+		}
 	}
 
 	//Create Combo
