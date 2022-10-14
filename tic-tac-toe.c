@@ -101,7 +101,7 @@ void checkScore(const bool twoPlayer, const bool spaces[NUMSPACE], const bool sp
 
 	//Get combo
 	createCombo(spaces, &matchNum, comp);
-	//While not a winner
+	//Get player 2 moves while not a winner
 	while (matchNum < (NUMSPACE/3) && !winner1 && comp[matchNum] != 0)
 	{
 		//Get combo
@@ -119,7 +119,7 @@ void checkScore(const bool twoPlayer, const bool spaces[NUMSPACE], const bool sp
 	//Get combo
 	createCombo(spaces2, &matchNum, comp);
 	
-	//Get player 2 moves
+	//Get player 2 moves while not a winner
 	while (matchNum < (NUMSPACE/3) && !winner2 && comp[matchNum] != 0)
 	{
 		//Get combo
@@ -199,12 +199,12 @@ void drawBoard(const bool twoPlayer, const char symbol, const char symbol2, cons
 			else if (row == 0 && (col == 1 || col == ((BOARDSIZE/3) + 1)
 				|| col == (2*(BOARDSIZE/3) + 1)))
 			{
-				//store counter as char
+				//Get space number from counter
 				sprintf(str, "%d", j + 1);
 				setBoard[row][col] = str[0];
 				j++;
 			}
-			//Store space symbol
+			//Store space symbol or space if unoccupied
 			else if (row == ((BOARDSIZE/3) - 8) && (col == 3 ||
 				col == ((BOARDSIZE/3) + 3) || col == (2*(BOARDSIZE/3) + 3)))
 			{
@@ -217,7 +217,7 @@ void drawBoard(const bool twoPlayer, const char symbol, const char symbol2, cons
 				i++;
 
 			}	 
-			//Store horizontal line
+			//Store horizontal lines
 			else if (row == ((BOARDSIZE/3) - 6) && col < (BOARDSIZE - 1))
 				setBoard[row][col] = '-';
 			else if (col == (BOARDSIZE - 1))
